@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>URBANNEX — Modern Essentials & Everyday Style</title><meta name="description" content="Curated fashion, gadgets, accessories and lifestyle products designed for modern living."><meta property="og:title" content="URBANNEX — Modern Essentials & Everyday Style"><meta property="og:description" content="Curated fashion, gadgets, accessories and lifestyle products designed for modern living."><meta property="og:type" content="website"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"><link href="css/style.css" rel="stylesheet"><link href="css/responsive.css" rel="stylesheet"></head>
+<body><div id="loader">URBANNEX</div><header id="hdr"></header><main>
+<section class="hero"><div class="container"><div class="row align-items-center g-4"><div class="col-lg-6">
+<h1 id="h1">Discover Your Everyday Essentials</h1><p class="my-3" id="hp">Curated fashion, gadgets, accessories and lifestyle products designed for modern living.</p>
+<div class="d-flex gap-2 flex-wrap" id="hb"><a href="shop.html" class="btn btn-dark-u">Shop Now</a><a href="#categories" class="btn btn-ghost">Explore Collections</a></div></div>
+<div class="col-lg-6"><div class="hero-img" id="himg" role="img" aria-label="URBANNEX lifestyle collection">🛍️<span class="float" style="top:8%;left:6%">⭐ 4.8 rated</span><span class="float" style="bottom:10%;right:6%">🚚 Free shipping</span></div></div></div></div></section>
+<div class="trust"><div class="container"><div class="row row-cols-2 row-cols-lg-4 g-0"><div class="col"><div class="it"><i class="bi bi-truck"></i>Free Shipping</div></div><div class="col"><div class="it"><i class="bi bi-lock"></i>Secure Payments</div></div><div class="col"><div class="it"><i class="bi bi-arrow-return-left"></i>Easy Returns</div></div><div class="col"><div class="it"><i class="bi bi-chat-dots"></i>24/7 Support</div></div></div></div></div>
+<section class="sec" id="categories"><div class="container"><div class="sh"><h2>Shop by Category</h2></div><div class="row g-3" id="cats"></div></div></section>
+<section class="sec alt"><div class="container"><div class="sh"><h2>Trending Now</h2><a href="shop.html">View all →</a></div><div class="row g-3" id="trend"></div></div></section>
+<section class="sec" id="new"><div class="container"><div class="sh"><h2>New Arrivals</h2><a href="shop.html?sort=new">View All Products →</a></div><div class="row g-3" id="newg"></div></div></section>
+<section class="promo"><div class="bg" id="pbg"></div><div class="container"><h2>Upgrade Your Everyday</h2><p class="mb-4">Premium products. Better choices. Better lifestyle.</p><a href="shop.html" class="btn btn-gold">Shop Collection</a></div></section>
+<section class="sec alt" id="deals"><div class="container"><div class="sh"><h2>Limited Time Deals</h2></div><div class="row g-3" id="dealg"></div></div></section>
+<section class="sec" id="about"><div class="container text-center" style="max-width:720px"><h2>Built for the way you live.</h2><p class="mt-3">URBANNEX brings together fashion, technology, accessories and everyday lifestyle products in one modern shopping experience. Order in seconds on WhatsApp.</p>
+<div class="row mt-4 g-3"><div class="col-4"><b class="fs-2 serif" data-n="10000">0</b>+<br><small>Customers</small></div><div class="col-4"><b class="fs-2 serif" data-n="500">0</b>+<br><small>Products</small></div><div class="col-4"><b class="fs-2 serif" data-n="50">0</b>+<br><small>Categories</small></div></div></div></section>
+</main><div id="ftr"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script><script src="js/products.js"></script><script src="js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+ $("#cats").innerHTML=CATS.map(c=>`<div class="col-6 col-md-4 col-lg-3"><a class="ccard reveal" href="shop.html?cat=${c}"><img loading="lazy" src="${art(c,1)}" alt="${c} collection"><div class="ov"><b>${c}</b><small>${PRODUCTS.filter(p=>p.category===c).length} products</small><i class="bi bi-arrow-right"></i></div></a></div>`).join("");
+ renderGrid("#trend",PRODUCTS.slice(0,8));renderGrid("#newg",[...PRODUCTS].reverse().slice(0,8));
+ const deals=[...PRODUCTS].sort((a,b)=>b.discount-a.discount).slice(0,4);
+ $("#dealg").innerHTML=deals.map(p=>card(p).replace('<article class="pcard reveal">','<div class="timer" data-t>--</div><article class="pcard reveal">')).join("");
+ let end=Date.now()+(2*3600+14*60+36)*1000;const f=n=>String(n).padStart(2,"0");
+ const tick=()=>{let s=Math.floor((end-Date.now())/1000);if(s<=0){end=Date.now()+3*3600e3;s=3*3600}$$("[data-t]").forEach(t=>t.textContent=`${f(s/3600|0)} : ${f(s%3600/60|0)} : ${f(s%60)}`)};tick();setInterval(tick,1000);
+ reveal();
+ if(!reduce){gsap.from("#h1,#hp,#hb",{y:30,opacity:0,duration:.6,stagger:.12,ease:"power2.out",delay:.4});gsap.from("#himg",{scale:.92,opacity:0,duration:.8,delay:.4});
+  gsap.to(".float",{y:-10,repeat:-1,yoyo:true,duration:2,ease:"sine.inOut",stagger:.4});
+  gsap.to("#pbg",{yPercent:15,ease:"none",scrollTrigger:{trigger:".promo",scrub:true}});}
+ $$("[data-n]").forEach(e=>{const n=+e.dataset.n,o={v:0};const run=()=>gsap.to(o,{v:n,duration:reduce?0:1.6,onUpdate:()=>e.textContent=Math.round(o.v).toLocaleString()});ScrollTrigger.create({trigger:e,once:true,start:"top 90%",onEnter:run})});
+});
+</script></body></html>
